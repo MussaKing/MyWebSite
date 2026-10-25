@@ -1,0 +1,72 @@
+<section class="px-5 pt-12 pb-40">
+  <div class="max-w-4xl mx-auto">
+    <a routerLink="/about" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors">
+      ← Назад к «Обо мне»
+    </a>
+
+    @if (tech) {
+      <div class="glass rounded-3xl overflow-hidden mb-8">
+        <div class="bg-gradient-to-r {{ tech.color }} p-8 sm:p-10 text-white">
+          <div class="flex items-center gap-5">
+            <div class="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center text-4xl font-bold shadow-lg">
+              {{ tech.icon }}
+            </div>
+            <div>
+              <p class="text-sm uppercase tracking-widest opacity-80">{{ tech.group }}</p>
+              <h1 class="text-4xl sm:text-5xl font-extrabold">{{ tech.name }}</h1>
+              <p class="opacity-90 mt-1">{{ tech.summary }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 sm:p-10 grid md:grid-cols-2 gap-10">
+          <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-3">Что это такое</h2>
+            <p class="text-gray-600 leading-relaxed">{{ tech.what }}</p>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-3">Как я это использую</h2>
+            <ul class="space-y-3">
+              @for (item of tech.howIUse; track item) {
+                <li class="flex gap-3 text-gray-600">
+                  <span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-gradient-to-br {{ tech.color }} text-white text-xs flex items-center justify-center">✓</span>
+                  <span>{{ item }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      @if (related.length) {
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Использую вместе с</h2>
+        <div class="grid sm:grid-cols-3 gap-4 mb-12">
+          @for (r of related; track r.id) {
+            <a [routerLink]="['/tech', r.id]" class="glass card-hover rounded-2xl p-5 flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br {{ r.color }} text-white flex items-center justify-center text-xl">{{ r.icon }}</div>
+              <div>
+                <p class="font-semibold text-gray-900">{{ r.name }}</p>
+                <p class="text-sm text-gray-500">{{ r.summary }}</p>
+              </div>
+            </a>
+          }
+        </div>
+      }
+
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Все технологии</h2>
+      <div class="flex flex-wrap gap-2">
+        @for (t of all; track t.id) {
+          <a [routerLink]="['/tech', t.id]"
+             class="rounded-full px-4 py-2 text-sm font-medium transition-all {{ t.id === tech.id ? 'bg-gray-900 text-white' : 'glass text-gray-800 hover:bg-white' }}">
+            {{ t.name }}
+          </a>
+        }
+      </div>
+    } @else {
+      <div class="glass rounded-3xl p-10 text-center">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Технология не найдена</h1>
+        <a routerLink="/about" class="text-blue-600 hover:underline">Вернуться</a>
+      </div>
+    }
+  </div>
+</section>

@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+/* Фон: горы Кавказа (двуглавый Эльбрус) */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  background-color: #eef4fb;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400' preserveAspectRatio='none'%3E%3Cpath fill='%23c7d6ea' d='M0 260 L120 200 L220 240 L360 130 L470 210 L560 170 L640 90 L700 60 L740 80 L790 50 L860 120 L960 180 L1080 110 L1200 200 L1320 150 L1440 220 L1440 400 L0 400Z'/%3E%3Cpath fill='%23ffffff' opacity='.85' d='M640 90 L700 60 L740 80 L790 50 L830 95 L800 88 L770 100 L740 92 L705 104 L670 98Z'/%3E%3Cpath fill='%2394aecf' d='M0 300 L100 260 L200 290 L320 220 L430 280 L540 240 L650 300 L760 230 L880 290 L1000 240 L1120 300 L1250 250 L1360 290 L1440 270 L1440 400 L0 400Z'/%3E%3Cpath fill='%235f7fa8' d='M0 350 L140 320 L280 345 L420 310 L580 350 L720 320 L880 352 L1040 318 L1200 348 L1340 325 L1440 340 L1440 400 L0 400Z'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, #dbe9f7 0%, #f5f9fd 60%, #ffffff 100%);
+  background-repeat: no-repeat;
+  background-position: bottom center, top;
+  background-size: 100% 45vh, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* Стеклянные карточки */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 30px rgba(30, 58, 110, 0.08);
+}
+
+.card-hover {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(30, 58, 110, 0.15);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,77 @@
+<section class="text-gray-600 body-font">
+  <div class="container px-5 pt-16 pb-40 mx-auto max-w-4xl">
+    <div class="mb-12">
+      <h1 class="text-4xl font-extrabold tracking-tight mb-2 text-gray-900">Обо мне</h1>
+      <div class="h-1 w-20 rounded bg-gradient-to-r from-blue-600 to-violet-600"></div>
+    </div>
+    <div class="glass rounded-2xl p-6 mb-16">
+    <p class="text-2xl text-gray-900 font-semibold mb-1">Шабатуков Мустафа</p>
+    <p class="text-blue-500 mb-6">Backend-разработчик · Программист · Преподаватель · г. Нальчик</p>
+    <p class="leading-relaxed text-lg mb-6">
+      Я создаю надёжную серверную часть веб-приложений — ту, которую пользователь не видит, но от которой
+      зависит, насколько быстро и стабильно всё работает. Моя сильная сторона — развитие живых проектов:
+      я быстро погружаюсь в существующий код, нахожу узкие места и делаю систему лучше, не останавливая её работу.
+    </p>
+    <ul class="space-y-3 text-lg">
+      <li class="flex gap-3"><span class="text-blue-600">⚡</span><span><b class="text-gray-900">Скорость.</b> Оптимизирую SQL-запросы и backend-логику — операции выполняются заметно быстрее.</span></li>
+      <li class="flex gap-3"><span class="text-blue-600">🔗</span><span><b class="text-gray-900">Интеграции.</b> Связываю приложения с внешними сервисами и автоматизирую процессы.</span></li>
+      <li class="flex gap-3"><span class="text-blue-600">🛡️</span><span><b class="text-gray-900">Стабильность.</b> Поддерживаю production-системы и оперативно устраняю инциденты.</span></li>
+      <li class="flex gap-3"><span class="text-blue-600">🚀</span><span><b class="text-gray-900">DevOps.</b> Разворачиваю приложения на Linux-серверах, упаковываю сервисы в Docker и настраиваю CI/CD, чтобы релизы выходили быстро и без сбоев.</span></li>
+      <li class="flex gap-3"><span class="text-blue-600">🤝</span><span><b class="text-gray-900">Командная работа.</b> Участвую в архитектурных решениях, анализирую требования и соблюдаю стандарты кода.</span></li>
+    </ul>
+    </div>
+
+    <h2 class="text-2xl font-bold mb-2 text-gray-900">Технологии</h2>
+    <p class="text-gray-500 mb-6">Нажмите на технологию, чтобы узнать, что это и как я её применяю.</p>
+    <div class="grid sm:grid-cols-2 gap-4 mb-16">
+      @for (group of stack; track group.title) {
+        <div class="glass rounded-2xl p-5">
+          <h3 class="text-sm uppercase tracking-widest text-blue-500 font-medium mb-3">{{ group.title }}</h3>
+          <div class="flex flex-wrap gap-2">
+            @for (item of group.items; track item.id) {
+              <a [routerLink]="['/tech', item.id]" [title]="item.summary"
+                 class="group inline-flex items-center gap-2 bg-white border border-gray-200 rounded-full pl-1 pr-3 py-1 text-gray-800 text-sm hover:border-transparent hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                <span class="w-6 h-6 rounded-full bg-gradient-to-br {{ item.color }} text-white text-xs flex items-center justify-center group-hover:scale-110 transition-transform">{{ item.icon }}</span>
+                {{ item.name }}
+                <span class="text-gray-400 group-hover:text-gray-900 group-hover:translate-x-0.5 transition-all">→</span>
+              </a>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-6 text-gray-900">Ключевые компетенции</h2>
+    <ul class="glass rounded-2xl p-6 grid sm:grid-cols-2 gap-x-8 gap-y-2 mb-16 list-disc pl-10">
+      @for (skill of competencies; track skill) {
+        <li class="leading-relaxed">{{ skill }}</li>
+      }
+    </ul>
+
+    <h2 class="text-2xl font-bold mb-8 text-gray-900">Опыт работы</h2>
+    <div class="glass rounded-2xl p-6 space-y-10 mb-16 border-l-4 border-l-blue-500">
+      @for (job of experience; track job.company) {
+        <div>
+          <p class="text-sm text-blue-500 font-medium">{{ job.period }}</p>
+          <h3 class="text-lg text-gray-900 font-medium mb-2">{{ job.role }} · {{ job.company }}</h3>
+          <ul class="list-disc pl-5 space-y-1">
+            @for (item of job.duties; track item) {
+              <li class="leading-relaxed">{{ item }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-8 text-gray-900">Образование</h2>
+    <div class="glass rounded-2xl p-6 space-y-6 border-l-4 border-l-violet-500">
+      @for (edu of education; track edu.speciality) {
+        <div>
+          <p class="text-sm text-blue-500 font-medium">{{ edu.year }}</p>
+          <h3 class="text-lg text-gray-900 font-medium">{{ edu.speciality }}</h3>
+          <p>Южный федеральный университет</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
