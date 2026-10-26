@@ -1,0 +1,6 @@
+/* Активный пункт меню: тёмный фон и белый текст, в том числе при наведении */
+.nav-active,
+.nav-active:hover {
+  background-color: #111827 !important;
+  color: #fff !important;
+}
