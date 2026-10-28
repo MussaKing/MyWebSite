@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "egenius",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:/File/Proj/EGEnius", "run", "dev"],
+      "port": 8123
+    },
+    {
+      "name": "mywebsite",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start", "--", "--port", "4201"],
+      "port": 4201
+    }
+  ]
+}

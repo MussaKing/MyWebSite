@@ -1,0 +1,35 @@
+<section class="text-gray-600 body-font">
+  <div class="container px-5 pt-10 sm:pt-16 pb-16 mx-auto max-w-5xl">
+    <div class="mb-12">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-gray-900">Проекты</h1>
+      <div class="h-1 w-20 rounded bg-gradient-to-r from-blue-600 to-violet-600"></div>
+    </div>
+
+    @for (project of projects; track project.name) {
+      <article class="glass rounded-2xl p-4 sm:p-6 mb-10">
+        <img [src]="project.screenshots[project.active].src" [alt]="project.name + ' — ' + project.screenshots[project.active].caption"
+             class="w-full rounded-xl border border-white shadow-md mb-3">
+        <div class="grid grid-cols-4 gap-2 sm:gap-3 mb-6">
+          @for (shot of project.screenshots; track shot.src; let i = $index) {
+            <button type="button" (click)="project.active = i" [title]="shot.caption"
+                    class="rounded-lg overflow-hidden border-2 transition-all hover:opacity-100"
+                    [class]="i === project.active ? 'border-blue-500' : 'border-transparent opacity-60'">
+              <img [src]="shot.src" [alt]="shot.caption" class="w-full aspect-video object-cover object-top">
+            </button>
+          }
+        </div>
+
+        <p class="text-xs font-semibold tracking-widest text-blue-600 mb-2">{{ project.tag }}</p>
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">{{ project.name }}</h2>
+        <p class="leading-relaxed text-base sm:text-lg mb-4">{{ project.description }}</p>
+        <ul class="list-disc pl-5 space-y-1 mb-6">
+          @for (item of project.features; track item) {
+            <li class="leading-relaxed">{{ item }}</li>
+          }
+        </ul>
+        <a [href]="project.github" target="_blank"
+           class="inline-block bg-gray-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-gray-700 transition-colors">GitHub ↗</a>
+      </article>
+    }
+  </div>
+</section>
