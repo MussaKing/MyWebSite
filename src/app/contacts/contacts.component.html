@@ -34,5 +34,59 @@
         <p class="text-blue-600 font-medium whitespace-nowrap">MussaPortfolio</p>
       </a>
     </div>
+
+    <div class="glass rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto mt-10">
+      <h2 class="text-2xl font-bold text-gray-900 mb-1">Написать мне</h2>
+      <p class="text-gray-600 mb-6">Оставьте сообщение — ответ придёт на указанный email.</p>
+
+      @if (status() === 'sent') {
+        <div class="rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 mb-6">
+          Спасибо! Сообщение отправлено, скоро отвечу.
+        </div>
+      }
+      @if (status() === 'error') {
+        <div class="rounded-xl bg-rose-50 border border-rose-200 text-rose-800 p-4 mb-6">
+          Не удалось отправить. Попробуйте ещё раз или напишите на почту напрямую.
+        </div>
+      }
+
+      <form #f="ngForm" (ngSubmit)="send(f)" class="grid gap-4" novalidate>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Имя</span>
+            <input name="name" [(ngModel)]="model.name" #name="ngModel" required maxlength="100"
+                   class="mt-1 w-full rounded-xl border border-gray-200 bg-white/80 px-4 py-2.5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                   placeholder="Как к вам обращаться">
+            @if (name.invalid && (name.touched || f.submitted)) {
+              <span class="text-xs text-rose-600">Укажите имя</span>
+            }
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Email</span>
+            <input name="email" type="email" [(ngModel)]="model.email" #email="ngModel" required email
+                   class="mt-1 w-full rounded-xl border border-gray-200 bg-white/80 px-4 py-2.5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                   placeholder="you&#64;example.com">
+            @if (email.invalid && (email.touched || f.submitted)) {
+              <span class="text-xs text-rose-600">Введите корректный email</span>
+            }
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-sm font-medium text-gray-700">Сообщение</span>
+          <textarea name="message" [(ngModel)]="model.message" #message="ngModel" required minlength="10" maxlength="3000" rows="5"
+                    class="mt-1 w-full rounded-xl border border-gray-200 bg-white/80 px-4 py-2.5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 resize-y"
+                    placeholder="Расскажите о проекте или задайте вопрос"></textarea>
+          @if (message.invalid && (message.touched || f.submitted)) {
+            <span class="text-xs text-rose-600">Минимум 10 символов</span>
+          }
+        </label>
+        <!-- Ловушка для ботов: людям не видна -->
+        <input name="honey" [(ngModel)]="model.honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+        <button type="submit" [disabled]="status() === 'sending'"
+                class="justify-self-start rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold px-6 py-3 shadow-lg hover:opacity-90 transition disabled:opacity-60">
+          {{ status() === 'sending' ? 'Отправка…' : 'Отправить' }}
+        </button>
+      </form>
+    </div>
   </div>
 </section>
