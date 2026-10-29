@@ -1,53 +1,74 @@
 <section class="text-gray-600 body-font">
-  <div class="container px-5 pt-10 sm:pt-16 pb-16 mx-auto max-w-5xl">
-    <div class="mb-12">
+  <div class="container px-5 pt-10 sm:pt-16 pb-16 mx-auto max-w-6xl">
+    <div class="mb-10 sm:mb-12">
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-gray-900">Проекты</h1>
       <div class="h-1 w-20 rounded bg-gradient-to-r from-blue-600 to-violet-600"></div>
     </div>
 
-    @for (project of projects; track project.name) {
-      <article class="glass rounded-2xl p-4 sm:p-6 mb-10">
-        @if (project.mobile) {
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
-          @for (shot of project.screenshots; track shot.src) {
-            <figure>
-              <img [src]="shot.src" [alt]="project.name + ' — ' + shot.caption"
-                   class="w-full rounded-xl border border-white shadow-md">
-              <figcaption class="text-center text-sm mt-2">{{ shot.caption }}</figcaption>
-            </figure>
-          }
-        </div>
-        } @else {
-        <img [src]="project.screenshots[project.active].src" [alt]="project.name + ' — ' + project.screenshots[project.active].caption"
-             class="w-full rounded-xl border border-white shadow-md mb-3">
-        <div class="grid grid-cols-4 gap-2 sm:gap-3 mb-6">
-          @for (shot of project.screenshots; track shot.src; let i = $index) {
-            <button type="button" (click)="project.active = i" [title]="shot.caption"
-                    class="rounded-lg overflow-hidden border-2 transition-all hover:opacity-100"
-                    [class]="i === project.active ? 'border-blue-500' : 'border-transparent opacity-60'">
-              <img [src]="shot.src" [alt]="shot.caption" class="w-full aspect-video object-cover object-top">
-            </button>
-          }
-        </div>
-        }
-
-        <p class="text-xs font-semibold tracking-widest text-blue-600 mb-2">{{ project.tag }}</p>
-        <h2 class="text-2xl font-bold text-gray-900 mb-3">{{ project.name }}</h2>
-        <p class="leading-relaxed text-base sm:text-lg mb-4">{{ project.description }}</p>
-        <ul class="list-disc pl-5 space-y-1 mb-6">
-          @for (item of project.features; track item) {
-            <li class="leading-relaxed">{{ item }}</li>
-          }
-        </ul>
-        @if (project.links) {
-          <div class="flex flex-wrap gap-3">
-            @for (link of project.links; track link.href) {
-              <a [href]="link.href" target="_blank" rel="noopener"
-                 class="inline-block bg-gray-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-gray-700 transition-colors">{{ link.label }}</a>
+    <div class="space-y-8 sm:space-y-10">
+    @for (project of projects; track project.name; let n = $index) {
+      <article class="glass rounded-3xl p-4 sm:p-6 lg:p-8 grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+        <!-- Скриншоты -->
+        <div class="lg:col-span-7">
+          @if (project.mobile) {
+          <div class="grid grid-cols-4 gap-2 sm:gap-3">
+            @for (shot of project.screenshots; track shot.src) {
+              <figure>
+                <img [src]="shot.src" [alt]="project.name + ' — ' + shot.caption"
+                     class="w-full rounded-xl sm:rounded-2xl ring-1 ring-black/5 shadow-md">
+                <figcaption class="text-center text-xs sm:text-sm text-gray-500 mt-2">{{ shot.caption }}</figcaption>
+              </figure>
             }
           </div>
-        }
+          } @else {
+          <img [src]="project.screenshots[project.active].src" [alt]="project.name + ' — ' + project.screenshots[project.active].caption"
+               class="w-full aspect-video object-cover object-top rounded-xl sm:rounded-2xl ring-1 ring-black/5 shadow-md mb-3">
+          <div class="grid grid-cols-4 gap-2 sm:gap-3">
+            @for (shot of project.screenshots; track shot.src; let i = $index) {
+              <button type="button" (click)="project.active = i" [title]="shot.caption"
+                      class="group text-center">
+                <span class="block rounded-lg overflow-hidden ring-2 transition-all"
+                      [class]="i === project.active ? 'ring-blue-500' : 'ring-transparent opacity-60 group-hover:opacity-100'">
+                  <img [src]="shot.src" [alt]="shot.caption" class="w-full aspect-video object-cover object-top">
+                </span>
+                <span class="block text-xs sm:text-sm mt-1.5 transition-colors"
+                      [class]="i === project.active ? 'text-gray-900 font-medium' : 'text-gray-500'">{{ shot.caption }}</span>
+              </button>
+            }
+          </div>
+          }
+        </div>
+
+        <!-- Описание -->
+        <div class="lg:col-span-5 flex flex-col">
+          <p class="text-sm font-semibold text-gray-400 mb-1">{{ (n + 1).toString().padStart(2, '0') }}</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{{ project.name }}</h2>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            @for (t of project.tag.split(' · '); track t) {
+              <span class="rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 px-2.5 py-0.5 text-xs font-medium">{{ t }}</span>
+            }
+          </div>
+          <p class="leading-relaxed mb-5">{{ project.description }}</p>
+          <ul class="space-y-2.5 mb-6 text-sm sm:text-[15px]">
+            @for (item of project.features; track item) {
+              <li class="flex gap-3">
+                <span class="mt-0.5 w-5 h-5 shrink-0 rounded-full bg-gradient-to-br from-blue-600 to-violet-600 text-white text-[11px] flex items-center justify-center">✓</span>
+                <span class="leading-relaxed">{{ item }}</span>
+              </li>
+            }
+          </ul>
+          @if (project.links) {
+            <div class="flex flex-wrap gap-2 mt-auto">
+              @for (link of project.links; track link.href; let first = $first) {
+                <a [href]="link.href" target="_blank" rel="noopener"
+                   class="inline-block px-4 py-2 rounded-full text-sm font-medium transition-colors"
+                   [class]="first ? 'bg-gray-900 text-white hover:bg-gray-700' : 'bg-white/70 text-gray-800 ring-1 ring-gray-200 hover:bg-white'">{{ link.label }}</a>
+              }
+            </div>
+          }
+        </div>
       </article>
     }
+    </div>
   </div>
 </section>
