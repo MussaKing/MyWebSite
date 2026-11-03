@@ -13,6 +13,13 @@ export class AboutComponent {
   stack = TECH_GROUPS.map(title => ({title, items: TECHS.filter(t => t.group === title)}));
 
   competencies = [
+    'Веб-приложения на ASP.NET Core, Razor Pages и EF Core',
+    'Интерфейсы на React и Vite',
+    'Android-приложения на Kotlin и Jetpack Compose',
+    'Офлайн-режим, локальный прогресс и синхронизация через Supabase',
+    'Авторизация, хеширование данных и ограничение попыток',
+    'Учебные сервисы: проверка ответов, тесты и отслеживание прогресса',
+    'Упаковка приложений в Docker и публикация через GitHub Actions',
     'Разработка и развитие backend-логики веб-приложений',
     'Оптимизация производительности приложений и SQL-запросов',
     'Проектирование и доработка REST API',
@@ -69,12 +76,12 @@ export class AboutComponent {
     {
       icon: '🛠️',
       title: 'Разработка backend',
-      description: 'Создам или доработаю серверную часть веб-приложения на Python или C#: от API до интеграций с внешними сервисами.'
+      description: 'Создам или доработаю серверную часть на Python или C#: API, авторизация, PostgreSQL, админка и интеграции. Для .NET использую ASP.NET Core и EF Core.'
     },
     {
-      icon: '⚡',
-      title: 'Ускорение и стабильность',
-      description: 'Найду узкие места, оптимизирую SQL-запросы и логику, помогу сделать систему быстрее и надёжнее.'
+      icon: '📱',
+      title: 'Веб- и Android-приложения',
+      description: 'Разработаю веб-интерфейс на React или Android-приложение на Kotlin и Jetpack Compose: с офлайн-режимом, сохранением прогресса и синхронизацией данных.'
     },
     {
       icon: '📊',

@@ -1,27 +1,75 @@
-# MyWebSite
+# Портфолио Мустафы Шабатукова
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+Личный сайт программиста: опыт работы, технологии, проекты со скриншотами и контакты. Основное направление — backend на Python и C#; в портфолио также представлены веб- и Android-приложения.
 
-## Development server
+## Разделы сайта
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Главная** — знакомство и основные направления работы.
+- **Обо мне** — компетенции, примеры из проектов, опыт работы, образование и услуги.
+- **Проекты** — описание приложений, технологии и галереи скриншотов. На широком экране скриншоты и описание расположены рядом, на телефоне — друг под другом.
+- **Технологии** — отдельные страницы с описанием инструментов и их применения.
+- **Контакты** — способы связи и ссылки на профили.
 
-## Code scaffolding
+## Проекты в портфолио
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| Проект | Описание | Технологии проекта |
+| --- | --- | --- |
+| CTFGame | Платформа Capture The Flag: задания, проверка флагов, рейтинг и админка. В карточке доступны скриншоты главной, списка заданий, задания и админки; ссылка на исходники не выводится. | ASP.NET Core 8, Razor Pages, EF Core, PostgreSQL, Docker |
+| EGENius | Подготовка к ЕГЭ по информатике: теория, банк задач, проверка ответов и пробные экзамены с таймером. | React, Vite, Python |
+| Путь (MuslimPath) | Android-приложение: учебные маршруты, Коран с переводом и аудио, время намаза, офлайн-режим и синхронизация. Опубликовано в RuStore. | Kotlin, Jetpack Compose, Supabase |
 
-## Build
+Большинство коммерческих проектов не представлены публично.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Технологии сайта
 
-## Running unit tests
+Angular 17, TypeScript, standalone-компоненты и Angular Router. Оформление — Tailwind CSS через CDN и собственные стили: адаптивная вёрстка, полупрозрачные карточки и фон с Эльбрусом. Шрифт Inter загружается через Google Fonts.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Для полной загрузки оформления и шрифта требуется доступ к внешним CDN.
 
-## Running end-to-end tests
+## Локальный запуск
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Потребуются Node.js и npm, совместимые с Angular 17 (например, Node.js 20).
 
-## Further help
+```sh
+npm ci
+npm start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Откройте http://localhost:4200/. При изменении исходников страница обновляется автоматически.
+
+## Сборка и проверки
+
+```sh
+npm run build
+```
+
+Готовый сайт сохраняется в `dist/my-web-site/browser/`.
+
+```sh
+npm test
+```
+
+Запускает настроенный тестовый раннер Karma/Jasmine; требуется установленный Chrome.
+
+## Структура
+
+```text
+src/app/
+  home/       Главная страница
+  about/      Информация об авторе, компетенции и опыт
+  projects/   Данные проектов и галереи скриншотов
+  tech/       Каталог технологий и страницы описаний
+  contacts/   Контакты
+src/assets/   Изображения и скриншоты проектов
+src/styles.css  Общие стили
+angular.json    Настройки сборки
+vercel.json     Сборка и маршрутизация для Vercel
+```
+
+Чтобы обновить проекты, измените `src/app/projects/projects.component.ts`; скриншоты размещайте в `src/assets/projects/`. Тексты раздела «Обо мне» находятся в `src/app/about/about.component.html` и `src/app/about/about.component.ts`.
+
+## Публикация
+
+**Vercel:** в `vercel.json` заданы команда `npm run build`, каталог `dist/my-web-site/browser` и перенаправление маршрутов на `index.html`.
+
+**GitHub Pages:** репозиторий также содержит готовые файлы сайта в корне. После изменений исходников пересоберите приложение и обновите публикуемые файлы из `dist/my-web-site/browser/`, включая скрипты и `assets/`. Файл `404.html` должен соответствовать собранному `index.html`, чтобы прямые переходы на внутренние страницы обрабатывались приложением. При публикации в подкаталоге задайте соответствующий `base-href` при сборке.
