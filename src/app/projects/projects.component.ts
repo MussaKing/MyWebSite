@@ -10,6 +10,26 @@ import {RouterLink} from "@angular/router";
 export class ProjectsComponent {
   projects = [
     {
+      name: 'CTFGame',
+      tag: 'ASP.NET CORE 8 · RAZOR PAGES · EF CORE · POSTGRESQL · DOCKER',
+      description: 'Веб-платформа для соревнований Capture The Flag в формате Jeopardy: ' +
+        'игроки решают задания по информационной безопасности, находят флаги и соревнуются за место в рейтинге.',
+      features: [
+        '16 демо-заданий в категориях Misc, Crypto, Forensics и Web',
+        'Регистрация, вход и отправка флагов с автоматической проверкой',
+        'Рейтинг по сумме очков с учётом времени их набора',
+        'Админка для управления заданиями и просмотра статистики',
+        'Хранение хешей флагов, ограничение попыток и запуск в Docker вместе с PostgreSQL'
+      ],
+      screenshots: [
+        {src: 'assets/projects/ctfgame/home.png', caption: 'Главная'},
+        {src: 'assets/projects/ctfgame/challenges.png', caption: 'Задания'},
+        {src: 'assets/projects/ctfgame/challenge.png', caption: 'Задание'},
+        {src: 'assets/projects/ctfgame/admin.png', caption: 'Админка'}
+      ],
+      active: 0
+    },
+    {
       name: 'EGENius',
       tag: 'REACT · VITE · PYTHON',
       description: 'Сайт для подготовки к ЕГЭ по информатике: все 27 заданий демоверсии ФИПИ 2027, ' +
